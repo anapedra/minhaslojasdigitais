@@ -7,8 +7,8 @@ import java.util.Objects;
 public class OderDTO {
     private User cliente;
 
-    public OderDTO(User user) {
-        this.cliente = user;
+    public OderDTO(User cliente) {
+        this.cliente = cliente;
     }
     public OderDTO(){
 
@@ -34,11 +34,11 @@ public class OderDTO {
         return Objects.hash(cliente);
     }
 
-    public User getUser() {
+    public User getCliente() {
         return cliente;
     }
 
-    public void setUser(User cliente) {
-        this.cliente=cliente;
+    public void setCliente(User cliente) {
+        this.cliente = cliente;
     }
 }
