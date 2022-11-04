@@ -1,5 +1,6 @@
 package com.amaressantana.minhaslojasdigitais.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
@@ -15,19 +16,21 @@ public class Oder implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column
+    @JsonFormat(shape = JsonFormat.Shape.STRING,pattern ="yyyy-MM-dd'T'HH:mm:ss'Z'",timezone = "GMT")
     private Instant dataCriacao;
     @Column
+    @JsonFormat(shape = JsonFormat.Shape.STRING,pattern ="yyyy-MM-dd'T'HH:mm:ss'Z'",timezone = "GMT")
     private Instant dataAtualizacao;
     @ManyToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "cliente_id")
     @JsonIgnore
-    private User user;
+    private User cliente;
 
-    public Oder(Long id, Instant dataCriacao, Instant dataAtualizacao, User user) {
+    public Oder(Long id, Instant dataCriacao, Instant dataAtualizacao, User cliente) {
         this.id = id;
         this.dataCriacao = dataCriacao;
         this.dataAtualizacao = dataAtualizacao;
-        this.user = user;
+        this.cliente = cliente;
     }
 
     public Oder() {
@@ -40,7 +43,7 @@ public class Oder implements Serializable {
                 "id=" + id +
                 ", dataCriacao=" + dataCriacao +
                 ", dataAtualizacao=" + dataAtualizacao +
-                ", user=" + user +
+                ", cliente=" + cliente +
                 '}';
     }
 
@@ -49,12 +52,12 @@ public class Oder implements Serializable {
         if (this == o) return true;
         if (!(o instanceof Oder)) return false;
         Oder oder = (Oder) o;
-        return Objects.equals(getId(), oder.getId()) && Objects.equals(getDataCriacao(), oder.getDataCriacao()) && Objects.equals(getDataAtualizacao(), oder.getDataAtualizacao()) && Objects.equals(getUser(), oder.getUser());
+        return Objects.equals(getId(), oder.getId()) && Objects.equals(getDataCriacao(), oder.getDataCriacao()) && Objects.equals(getDataAtualizacao(), oder.getDataAtualizacao()) && Objects.equals(cliente, oder.cliente);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getDataCriacao(), getDataAtualizacao(), getUser());
+        return Objects.hash(getId(), getDataCriacao(), getDataAtualizacao(), cliente);
     }
 
     public Long getId() {
@@ -82,10 +85,10 @@ public class Oder implements Serializable {
     }
 
     public User getUser() {
-        return user;
+        return cliente;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUser(User cliente) {
+        this.cliente= cliente;
     }
 }

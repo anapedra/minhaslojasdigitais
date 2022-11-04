@@ -32,7 +32,7 @@ public class User implements Serializable {
     @Column
     @JsonFormat(shape = JsonFormat.Shape.STRING,pattern ="yyyy-MM-dd'T'HH:mm:ss'Z'",timezone = "GMT")
     private Instant dataAtualizacao;
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "cliente")
     private List<Oder> oders=new ArrayList<>();
 
 
