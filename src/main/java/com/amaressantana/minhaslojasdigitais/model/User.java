@@ -6,6 +6,8 @@ import jakarta.validation.constraints.Email;
 
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -30,6 +32,8 @@ public class User implements Serializable {
     @Column
     @JsonFormat(shape = JsonFormat.Shape.STRING,pattern ="yyyy-MM-dd'T'HH:mm:ss'Z'",timezone = "GMT")
     private Instant dataAtualizacao;
+    @OneToMany(mappedBy = "user")
+    private List<Oder> oders=new ArrayList<>();
 
 
 
@@ -43,30 +47,6 @@ public class User implements Serializable {
 
     public User() {
 
-    }
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", email='" + email + '\'' +
-                ", phone='" + phone + '\'' +
-                ", password='" + password + '\'' +
-                '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof User)) return false;
-        User user = (User) o;
-        return Objects.equals(getId(), user.getId()) && Objects.equals(getName(), user.getName()) && Objects.equals(getEmail(), user.getEmail()) && Objects.equals(getPhone(), user.getPhone()) && Objects.equals(getPassword(), user.getPassword());
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(getId(), getName(), getEmail(), getPhone(), getPassword());
     }
 
     public Long getId() {
@@ -123,5 +103,36 @@ public class User implements Serializable {
 
     public void setDataAtualizacao(Instant dataAtualizacao) {
         this.dataAtualizacao = dataAtualizacao;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", phone='" + phone + '\'' +
+                ", password='" + password + '\'' +
+                ", dataCriacao=" + dataCriacao +
+                ", dataAtualizacao=" + dataAtualizacao +
+                ", oders=" + oders +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof User)) return false;
+        User user = (User) o;
+        return Objects.equals(getId(), user.getId()) && Objects.equals(getName(), user.getName()) && Objects.equals(getEmail(), user.getEmail()) && Objects.equals(getPhone(), user.getPhone()) && Objects.equals(getPassword(), user.getPassword()) && Objects.equals(getDataCriacao(), user.getDataCriacao()) && Objects.equals(getDataAtualizacao(), user.getDataAtualizacao()) && Objects.equals(getOders(), user.getOders());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId(), getName(), getEmail(), getPhone(), getPassword(), getDataCriacao(), getDataAtualizacao(), getOders());
+    }
+
+    public List<Oder> getOders() {
+        return oders;
     }
 }

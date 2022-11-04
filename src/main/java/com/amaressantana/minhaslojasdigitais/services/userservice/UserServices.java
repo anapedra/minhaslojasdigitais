@@ -19,6 +19,7 @@ public class UserServices {
     public UserServices(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
+
     public User saveUser(User user){
         user.setDataCriacao(Instant.now());
         return userRepository.saveAndFlush(user);
@@ -44,4 +45,5 @@ public class UserServices {
         findById(id);
         userRepository.deleteById(id);
     }
+
 }
