@@ -22,19 +22,18 @@ public class Oder implements Serializable {
     @JsonFormat(shape = JsonFormat.Shape.STRING,pattern ="yyyy-MM-dd'T'HH:mm:ss'Z'",timezone = "GMT")
     private Instant dataAtualizacao;
     @ManyToOne
-    @JoinColumn(name = "cliente_id")
-    @JsonIgnore
-    private User cliente;
+    @JoinColumn(name = "user_id")
+    private User user;
 
-    public Oder(Long id, Instant dataCriacao, Instant dataAtualizacao, User cliente) {
+    public Oder(){
+
+    }
+
+    public Oder(Long id, Instant dataCriacao, Instant dataAtualizacao, User user) {
         this.id = id;
         this.dataCriacao = dataCriacao;
         this.dataAtualizacao = dataAtualizacao;
-        this.cliente = cliente;
-    }
-
-    public Oder() {
-
+        this.user = user;
     }
 
     @Override
@@ -43,7 +42,7 @@ public class Oder implements Serializable {
                 "id=" + id +
                 ", dataCriacao=" + dataCriacao +
                 ", dataAtualizacao=" + dataAtualizacao +
-                ", cliente=" + cliente +
+                ", user=" + user +
                 '}';
     }
 
@@ -52,12 +51,12 @@ public class Oder implements Serializable {
         if (this == o) return true;
         if (!(o instanceof Oder)) return false;
         Oder oder = (Oder) o;
-        return Objects.equals(getId(), oder.getId()) && Objects.equals(getDataCriacao(), oder.getDataCriacao()) && Objects.equals(getDataAtualizacao(), oder.getDataAtualizacao()) && Objects.equals(cliente, oder.cliente);
+        return Objects.equals(getId(), oder.getId()) && Objects.equals(getDataCriacao(), oder.getDataCriacao()) && Objects.equals(getDataAtualizacao(), oder.getDataAtualizacao()) && Objects.equals(getUser(), oder.getUser());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getDataCriacao(), getDataAtualizacao(), cliente);
+        return Objects.hash(getId(), getDataCriacao(), getDataAtualizacao(), getUser());
     }
 
     public Long getId() {
@@ -85,10 +84,13 @@ public class Oder implements Serializable {
     }
 
     public User getUser() {
-        return cliente;
+        return user;
     }
 
-    public void setUser(User cliente) {
-        this.cliente= cliente;
+    public void setUser(User user) {
+        this.user = user;
     }
 }
+
+
+

@@ -5,19 +5,20 @@ import com.amaressantana.minhaslojasdigitais.model.User;
 import java.util.Objects;
 
 public class OderDTO {
-    private User cliente;
+    private User user;
 
-    public OderDTO(User cliente) {
-        this.cliente = cliente;
-    }
     public OderDTO(){
 
+    }
+
+    public OderDTO(User user) {
+        this.user = user;
     }
 
     @Override
     public String toString() {
         return "OderDTO{" +
-                "cliente=" + cliente +
+                "user=" + user +
                 '}';
     }
 
@@ -26,19 +27,20 @@ public class OderDTO {
         if (this == o) return true;
         if (!(o instanceof OderDTO)) return false;
         OderDTO oderDTO = (OderDTO) o;
-        return Objects.equals(cliente, oderDTO.cliente);
+        return Objects.equals(getUser(), oderDTO.getUser());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(cliente);
+        return Objects.hash(getUser());
     }
 
-    public User getCliente() {
-        return cliente;
+    public User getUser() {
+        return user;
     }
 
-    public void setCliente(User cliente) {
-        this.cliente = cliente;
+    public void setUser(User user) {
+        this.user = user;
     }
 }
+
