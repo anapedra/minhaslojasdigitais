@@ -4,9 +4,7 @@ import jakarta.persistence.*;
 
 import java.io.Serial;
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Table(name = "tb_produto")
@@ -21,9 +19,10 @@ public class Product implements Serializable {
     private  String descricao;
     @Column
     private String imgUri;
+
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "tb_product_category",joinColumns = @JoinColumn(name = "prodct_id"),inverseJoinColumns = @JoinColumn(name = "category_id"))
-    private Set<CategoryProduct> categorys = new HashSet<>();
+    private List<CategoryProduct> categorys = new ArrayList<>();
 
 
     public Product(Long id, String name, String descricao, String imgUri) {
@@ -42,28 +41,18 @@ public class Product implements Serializable {
         if (this == o) return true;
         if (!(o instanceof Product)) return false;
         Product product = (Product) o;
-        return Objects.equals(getId(), product.getId()) && Objects.equals(getName(), product.getName()) && Objects.equals(getDescricao(), product.getDescricao()) && Objects.equals(getImgUri(), product.getImgUri()) && Objects.equals(getCategorys(), product.getCategorys());
+        return Objects.equals(getId(), product.getId());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getName(), getDescricao(), getImgUri(), getCategorys());
+        return Objects.hash(getId());
     }
 
-    @Override
-    public String toString() {
-        return "Product{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", descricao='" + descricao + '\'' +
-                ", imgUri='" + imgUri + '\'' +
-                ", categorys=" + categorys +
-                '}';
-    }
-
-    public Set<CategoryProduct> getCategorys() {
+    public List<CategoryProduct> getCategorys() {
         return categorys;
     }
+
 
     public Long getId() {
         return id;
