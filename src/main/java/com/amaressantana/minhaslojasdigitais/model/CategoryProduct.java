@@ -17,8 +17,8 @@ public class CategoryProduct implements Serializable {
     private Long id;
     @Column(nullable = false)
     private String nome;
-    @JsonIgnore
-    @ManyToMany(mappedBy = "categorys")
+
+    @ManyToMany(mappedBy = "categorys",fetch = FetchType.EAGER)
     private Set<Product> products=new HashSet<>();
 
     public CategoryProduct(Long id, String nome, Set<Product> products) {

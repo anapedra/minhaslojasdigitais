@@ -21,7 +21,7 @@ public class Product implements Serializable {
     private  String descricao;
     @Column
     private String imgUri;
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "tb_product_category",joinColumns = @JoinColumn(name = "prodct_id"),inverseJoinColumns = @JoinColumn(name = "category_id"))
     private Set<CategoryProduct> categorys = new HashSet<>();
 
