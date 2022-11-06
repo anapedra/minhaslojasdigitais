@@ -19,16 +19,19 @@ public class Product implements Serializable {
     private  String descricao;
     @Column
     private String imgUri;
+    @Column(nullable = false)
+    private Double price;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany
     @JoinTable(name = "tb_product_category",joinColumns = @JoinColumn(name = "prodct_id"),inverseJoinColumns = @JoinColumn(name = "category_id"))
-    private List<CategoryProduct> categorys = new ArrayList<>();
+    private Set<CategoryProduct> categorys = new HashSet<>();
 
 
-    public Product(Long id, String name, String descricao, String imgUri) {
+    public Product(Long id, String name, String descricao,Double price, String imgUri) {
         this.id = id;
         this.name = name;
         this.descricao = descricao;
+        this.price=price;
         this.imgUri = imgUri;
     }
 
@@ -49,7 +52,7 @@ public class Product implements Serializable {
         return Objects.hash(getId());
     }
 
-    public List<CategoryProduct> getCategorys() {
+    public Set<CategoryProduct> getCategorys() {
         return categorys;
     }
 
@@ -78,6 +81,14 @@ public class Product implements Serializable {
         this.descricao = descricao;
     }
 
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
+    }
+
     public String getImgUri() {
         return imgUri;
     }
@@ -85,4 +96,5 @@ public class Product implements Serializable {
     public void setImgUri(String imgUri) {
         this.imgUri = imgUri;
     }
+
 }

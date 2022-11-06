@@ -11,7 +11,7 @@ public class ProductDTO {
     @NotBlank
     private  String descricao;
     private String imgUri;
-    private List<CategoryProduct> categorys = new ArrayList<>();
+    private Set<CategoryProduct> categorys = new HashSet<>();
 
 
     public ProductDTO(){
@@ -25,7 +25,7 @@ public class ProductDTO {
     }
 
 
-    public List<CategoryProduct> getCategorys() {
+    public Set<CategoryProduct> getCategorys() {
         return categorys;
     }
 

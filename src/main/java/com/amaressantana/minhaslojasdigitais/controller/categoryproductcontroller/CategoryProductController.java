@@ -21,10 +21,10 @@ public class CategoryProductController {
         this.categoryProductService = categoryProductService;
     }
     @PostMapping
-    public ResponseEntity<Object> saveCategoryProduct(@RequestBody @Valid CategoryProductDTO categoryProductDTO){
-        var category=new CategoryProduct();
-        BeanUtils.copyProperties(categoryProductDTO,category);
-        return ResponseEntity.status(HttpStatus.CREATED).body(categoryProductService.saveCategoryProduct(category));
+    public ResponseEntity<CategoryProduct> saveCategoryProduct(@RequestBody @Valid CategoryProduct categoryProduc){
+       // var category=new CategoryProduct();
+       // BeanUtils.copyProperties(categoryProductDTO,category);
+        return ResponseEntity.status(HttpStatus.CREATED).body(categoryProductService.saveCategoryProduct(categoryProduc));
     }
     @GetMapping("/{id}")
     public ResponseEntity<CategoryProduct> findById(@PathVariable Long id){

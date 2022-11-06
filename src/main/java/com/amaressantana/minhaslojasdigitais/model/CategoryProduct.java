@@ -18,7 +18,21 @@ public class CategoryProduct implements Serializable {
     @Column(nullable = false)
     private String nome;
 
-    @ManyToMany(mappedBy = "categorys",fetch = FetchType.EAGER)
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof CategoryProduct)) return false;
+        CategoryProduct that = (CategoryProduct) o;
+        return Objects.equals(getId(), that.getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId());
+    }
+
+    @ManyToMany(mappedBy = "categorys")
+    @JsonIgnore
     private Set<Product> products=new HashSet<>();
 
     public CategoryProduct(Long id, String nome, Set<Product> products) {
@@ -34,19 +48,6 @@ public class CategoryProduct implements Serializable {
                 ", nome='" + nome + '\'' +
                 ", products=" + products +
                 '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof CategoryProduct)) return false;
-        CategoryProduct that = (CategoryProduct) o;
-        return Objects.equals(getId(), that.getId()) && Objects.equals(getNome(), that.getNome()) && Objects.equals(getProducts(), that.getProducts());
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(getId(), getNome(), getProducts());
     }
 
     public Set<Product> getProducts() {
