@@ -1,9 +1,8 @@
 package com.amaressantana.minhaslojasdigitais.model;
 
 import com.amaressantana.minhaslojasdigitais.model.entitypk.OderItemPk;
-import jakarta.persistence.EmbeddedId;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+import jakarta.persistence.criteria.Order;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -18,8 +17,8 @@ public class OrderItem implements Serializable {
     private Integer quantity;
     private Double price;
 
-    public OrderItem(Oder order, Product product, Integer quantity, Double price) {
-        id.setOrder(order);
+    public OrderItem(Oder oder, Product product, Integer quantity, Double price) {
+        id.setOrder(oder);
         id.setProduct(product);
         this.quantity = quantity;
         this.price = price;

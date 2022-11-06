@@ -14,32 +14,32 @@ public class OderItemPk implements Serializable {
     private static final long serialVersionUID=1L;
 
     @ManyToOne
-    @JoinColumn(name = "order_id")
-    private Oder order;
+    @JoinColumn(name = "oder_id")
+    private Oder oder;
 
     @ManyToOne
     @JoinColumn(name = "product_id")
     private Product product;
+
+    public Oder getOrder() {
+        return oder;
+    }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof OderItemPk)) return false;
         OderItemPk that = (OderItemPk) o;
-        return Objects.equals(getOrder(), that.getOrder()) && Objects.equals(getProduct(), that.getProduct());
+        return Objects.equals(oder, that.oder) && Objects.equals(getProduct(), that.getProduct());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getOrder(), getProduct());
+        return Objects.hash(oder, getProduct());
     }
 
-    public Oder getOrder() {
-        return order;
-    }
-
-    public void setOrder(Oder order) {
-        this.order = order;
+    public void setOrder(Oder oder) {
+        this.oder = oder;
     }
 
     public Product getProduct() {
