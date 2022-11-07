@@ -1,6 +1,7 @@
 package com.amaressantana.minhaslojasdigitais.model;
 
 import com.amaressantana.minhaslojasdigitais.model.entitypk.OderItemPk;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.persistence.criteria.Order;
 
@@ -13,8 +14,10 @@ public class OrderItem implements Serializable {
     private static final long serialVersionUID=1L;
 
     @EmbeddedId
-    private OderItemPk id;
+    private OderItemPk id=new OderItemPk();
+    @Column(nullable = false)
     private Integer quantity;
+    @Column(nullable = false)
     private Double price;
 
     public OrderItem(Oder oder, Product product, Integer quantity, Double price) {
@@ -27,7 +30,7 @@ public class OrderItem implements Serializable {
 
     }
 
-
+    @JsonIgnore
     public Oder getOder(){
         return id.getOrder();
     }

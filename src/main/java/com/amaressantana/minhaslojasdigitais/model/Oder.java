@@ -24,6 +24,7 @@ public class Oder implements Serializable {
     @JsonFormat(shape = JsonFormat.Shape.STRING,pattern ="yyyy-MM-dd'T'HH:mm:ss'Z'",timezone = "GMT")
     private Instant dataAtualizacao;
     private Integer orderStatos;
+
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;

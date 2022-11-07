@@ -1,5 +1,6 @@
 package com.amaressantana.minhaslojasdigitais.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -22,10 +23,12 @@ public class Product implements Serializable {
     private String imgUri;
     @Column(nullable = false)
     private Double price;
-
     @ManyToMany
     @JoinTable(name = "tb_product_category",joinColumns = @JoinColumn(name = "prodct_id"),inverseJoinColumns = @JoinColumn(name = "category_id"))
     private Set<CategoryProduct> categorys = new HashSet<>();
+
+    @OneToMany(mappedBy = "id.product")
+    private Set<OrderItem> orderItems=new HashSet<>();
 
 
     public Product(Long id, String name, String descricao,Double price, String imgUri) {
@@ -51,6 +54,14 @@ public class Product implements Serializable {
     @Override
     public int hashCode() {
         return Objects.hash(getId());
+    }
+    @JsonIgnore
+    public Set<Oder> getOders() {
+        Set<Oder> set=new HashSet<>();
+        for (OrderItem x:orderItems){
+            set.add(x.getOder());
+        }
+        return set;
     }
 
     public Set<CategoryProduct> getCategorys() {
