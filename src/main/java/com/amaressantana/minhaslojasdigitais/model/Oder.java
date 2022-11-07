@@ -24,6 +24,8 @@ public class Oder implements Serializable {
     @JsonFormat(shape = JsonFormat.Shape.STRING,pattern ="yyyy-MM-dd'T'HH:mm:ss'Z'",timezone = "GMT")
     private Instant dataAtualizacao;
     private Integer orderStatos;
+    @OneToOne(mappedBy = "oder",cascade = CascadeType.ALL)
+    private Payment payment;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -111,6 +113,19 @@ public class Oder implements Serializable {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+
+    public void setOrderStatos(Integer orderStatos) {
+        this.orderStatos = orderStatos;
+    }
+
+    public Payment getPayment() {
+        return payment;
+    }
+
+    public void setPayment(Payment payment) {
+        this.payment = payment;
     }
 }
 
