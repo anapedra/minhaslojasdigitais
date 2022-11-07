@@ -28,7 +28,8 @@ public class Oder implements Serializable {
     @JoinColumn(name = "user_id")
     private User user;
 
-
+    @OneToMany(mappedBy ="id.oder")
+    private Set<OrderItem> items = new HashSet<>();
 
     public Oder(){
 
@@ -63,6 +64,10 @@ public class Oder implements Serializable {
     @Override
     public int hashCode() {
         return Objects.hash(getId(), getDataCriacao(), getDataAtualizacao(), getOrderStatos(), getUser());
+    }
+
+    public Set<OrderItem> getItems() {
+        return items;
     }
 
     public Long getId() {

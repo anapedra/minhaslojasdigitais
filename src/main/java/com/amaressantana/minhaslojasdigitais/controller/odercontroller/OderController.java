@@ -20,10 +20,10 @@ public class OderController {
         this.oderService = oderService;
     }
     @PostMapping
-    public ResponseEntity<Object> saveOder(@RequestBody @Valid OderDTO oderDTO){
-        var order=new Oder();
-        BeanUtils.copyProperties(oderDTO,order);
-        return ResponseEntity.status(HttpStatus.CREATED).body(oderService.saveOder(order));
+    public ResponseEntity<Oder> saveOder(@RequestBody @Valid Oder oder){
+      //  var order=new Oder();
+       // BeanUtils.copyProperties(oderDTO,order);
+        return ResponseEntity.status(HttpStatus.CREATED).body(oderService.saveOder(oder));
     }
     @GetMapping
     public ResponseEntity<Page<Oder>> findAll(Pageable pageable){

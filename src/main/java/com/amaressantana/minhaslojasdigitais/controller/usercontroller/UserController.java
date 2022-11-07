@@ -20,9 +20,9 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<Object> saveUser(@RequestBody @Valid UserDTO userDTO){
-        var user= new User();
-        BeanUtils.copyProperties(userDTO,user);
+    public ResponseEntity<User> saveUser(@RequestBody @Valid User user){
+       // var user= new User();
+      //  BeanUtils.copyProperties(userDTO,user);
         return ResponseEntity.status(HttpStatus.CREATED).body(userServices.saveUser(user));
     }
     @GetMapping
@@ -36,9 +36,9 @@ public class UserController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> AtualizarUsuario(@PathVariable Long id,@RequestBody @Valid UserDTO userDTO){
-        var user=new User();
-        BeanUtils.copyProperties(userDTO, user);
+    public ResponseEntity<?> AtualizarUsuario(@PathVariable Long id,@RequestBody @Valid User user){
+        //var user=new User();
+       // BeanUtils.copyProperties(userDTO, user);
         userServices.atualizarUser(id,user);
         return ResponseEntity.status(HttpStatus.CREATED).body(userServices.saveUser(user));
 
