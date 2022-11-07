@@ -69,6 +69,14 @@ public class Oder implements Serializable {
         return Objects.hash(getId(), getDataCriacao(), getDataAtualizacao(), getOrderStatos(), getUser());
     }
 
+    public Double getTotal(){
+        double soma=0.0;
+        for (OrderItem x: items){
+            soma=+ x.getSubTotal();
+        }
+        return soma;
+    }
+
     public Set<OrderItem> getItems() {
         return items;
     }

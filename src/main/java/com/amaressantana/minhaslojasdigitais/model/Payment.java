@@ -1,5 +1,6 @@
 package com.amaressantana.minhaslojasdigitais.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -16,6 +17,7 @@ public class Payment implements Serializable {
     private Instant momentPayment;
     @OneToOne
     @MapsId
+    @JsonIgnore
     private Oder oder;
 
     public Payment(Long id, Instant momentPayment, Oder oder) {
